@@ -23,6 +23,9 @@ function setBoard() {
         cards[i].firstElementChild.className = cardSymbols[i];
     }
     updateScore(0);
+    initStarRating();
+    hitCounter = 0;
+    timer = 0;
 }
 
 //function to hide the card
