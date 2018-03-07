@@ -4,7 +4,10 @@
 let listOfCards;
 let deckBoard = document.querySelector('.deck');
 let cardSymbols = []; //array to hold symbols
+let cardsCompare = []; //array to hold 2 cards for compare
 let hitCounter = 0;
+let firstCardIndex = 0;
+let pairsToDiscover = 8;
 
 //get symbols from cards
 let cards = document.querySelectorAll(".deck .card");
@@ -16,8 +19,6 @@ function setBoard() {
     cardSymbols = shuffle(cardSymbols);
     for (let i = 0; i < cards.length; i++) {
         cards[i].firstElementChild.className = cardSymbols[i];
-        hideCard(i);
-        showCard(i);
     }
 }
 
@@ -67,3 +68,42 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+//set up the listener event for cards
+
+for (let i = 0; i < cards.length; i++) {
+    cards[i].addEventListener('click', function() {
+        hitCounter++;
+        showCard(i);
+        if (hitCounter > 0) {
+            if (hitCounter % 2 === 1) {
+                firstCardIndex = i;
+            } else {
+                verifyMatch(i);
+            }
+        }
+        // hideCard(i);
+
+    });
+}
+
+//check if 2 cards match
+function verifyMatch(index) {
+    if (cards[index].firstElementChild.className === cards[firstCardIndex].firstElementChild.className) {
+        //we have a match, lock the cards
+        cards[index].classList.add('match');
+        cards[firstCardIndex].classList.add("match");
+        pairsToDiscover--;
+        if (pairsToDiscover <= 1) winGame();
+    } else {
+        window.setTimeout(function() {
+            hideCard(index);
+            hideCard(firstCardIndex);
+        }, 500);
+
+    }
+}
+
+function winGame() {
+    console.log("You won !!!")
+}
