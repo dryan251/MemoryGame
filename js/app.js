@@ -1,13 +1,14 @@
 /*
  * Create a list that holds all of your cards
  */
-let listOfCards;
 let deckBoard = document.querySelector('.deck');
 let cardSymbols = []; //array to hold symbols
-let cardsCompare = []; //array to hold 2 cards for compare
 let hitCounter = 0;
 let firstCardIndex = 0;
 let pairsToDiscover = 8;
+let timer = 0;
+let mm = 0,
+    ss = 0;
 
 //get symbols from cards
 let cards = document.querySelectorAll(".deck .card");
@@ -76,17 +77,31 @@ for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener('click', function() {
         if (!cards[i].classList.contains("open")) {
             hitCounter++;
+            if (hitCounter === 1) {
+                //timer
+                setInterval(setTime, 1000);
+            }
             showCard(i);
-            if (hitCounter > 0) {
-                if (hitCounter % 2 === 1) {
-                    firstCardIndex = i;
-                } else {
-                    verifyMatch(i);
-                    updateScore(hitCounter);
-                }
+            if (hitCounter % 2 === 1) {
+                firstCardIndex = i;
+            } else {
+                verifyMatch(i);
+                updateScore(hitCounter);
             }
         }
     });
+}
+
+
+function setTime() {
+    ++timer;
+    ss = (timer % 60);
+    mm = parseInt(timer / 60);
+    document.querySelector('.timer').textContent = (clock(mm) + ":" + clock(ss));
+}
+
+function clock(x) {
+    return (x < 10) ? ("0" + x.toFixed(0)) : x.toFixed(0);
 }
 
 function updateScore(val) {
