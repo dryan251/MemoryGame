@@ -20,6 +20,7 @@ function setBoard() {
     for (let i = 0; i < cards.length; i++) {
         cards[i].firstElementChild.className = cardSymbols[i];
     }
+    updateScore(0);
 }
 
 //function to hide the card
@@ -73,18 +74,30 @@ function shuffle(array) {
 
 for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener('click', function() {
-        hitCounter++;
-        showCard(i);
-        if (hitCounter > 0) {
-            if (hitCounter % 2 === 1) {
-                firstCardIndex = i;
-            } else {
-                verifyMatch(i);
+        if (!cards[i].classList.contains("match")) {
+            hitCounter++;
+            showCard(i);
+            if (hitCounter > 0) {
+                if (hitCounter % 2 === 1) {
+                    firstCardIndex = i;
+                } else {
+                    verifyMatch(i);
+                    updateScore(hitCounter);
+                }
             }
         }
-        // hideCard(i);
-
     });
+}
+
+function updateScore(val) {
+    document.querySelector('.moves').textContent = (val / 2).toFixed(0);
+    if (hitCounter === 22 || hitCounter === 28 ||
+        hitCounter === 36) deleteStar();
+}
+
+function deleteStar() {
+    let star = document.querySelector('.stars');
+    star.firstElementChild.remove();
 }
 
 //check if 2 cards match
@@ -94,13 +107,12 @@ function verifyMatch(index) {
         cards[index].classList.add('match');
         cards[firstCardIndex].classList.add("match");
         pairsToDiscover--;
-        if (pairsToDiscover <= 1) winGame();
+        if (pairsToDiscover === 0) winGame();
     } else {
         window.setTimeout(function() {
             hideCard(index);
             hideCard(firstCardIndex);
-        }, 500);
-
+        }, 800);
     }
 }
 
