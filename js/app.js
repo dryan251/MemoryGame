@@ -3,8 +3,22 @@
  */
 let listOfCards;
 let deckBoard = document.querySelector('.deck');
+let cardSymbols = []; //array to hold symbols
 
-clear(deckBoard); //empty the board - delete all cards
+//get symbols from cards
+let cards = document.querySelectorAll(".deck .card");
+for (let i = 0; i < cards.length; i++) {
+    cardSymbols[i] = cards[i].firstElementChild.className;
+}
+
+function setBoard() {
+    cardSymbols = shuffle(cardSymbols);
+    for (let i = 0; i < cards.length; i++) {
+        cards[i].firstElementChild.className = cardSymbols[i];
+    }
+}
+
+// clear(deckBoard); //empty the board - delete all cards
 // populate(deckBoard); //add cards to board
 
 
@@ -15,6 +29,7 @@ clear(deckBoard); //empty the board - delete all cards
  *   - add each card's HTML to the page
  */
 
+//clear the board
 function clear(el) {
     while (el.firstChild) {
         el.removeChild(el.firstChild);
@@ -49,3 +64,5 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+setBoard();
