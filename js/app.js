@@ -8,7 +8,8 @@ let firstCardIndex = 0;
 let pairsToDiscover = 8;
 let timer = 0;
 let mm = 0,
-    ss = 0;
+    ss = 0,
+    starRating = 3;
 
 //get symbols from cards
 let cards = document.querySelectorAll(".deck .card");
@@ -110,9 +111,10 @@ function updateScore(val) {
         hitCounter === 36) deleteStar();
 }
 
-function deleteStar() {
+function deleteStar(index) {
     let star = document.querySelector('.stars');
     star.firstElementChild.remove();
+    starRating--;
 }
 
 //check if 2 cards match
