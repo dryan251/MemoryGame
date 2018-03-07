@@ -74,7 +74,7 @@ function shuffle(array) {
 
 for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener('click', function() {
-        if (!cards[i].classList.contains("match")) {
+        if (!cards[i].classList.contains("open")) {
             hitCounter++;
             showCard(i);
             if (hitCounter > 0) {
@@ -102,6 +102,7 @@ function deleteStar() {
 
 //check if 2 cards match
 function verifyMatch(index) {
+
     if (cards[index].firstElementChild.className === cards[firstCardIndex].firstElementChild.className) {
         //we have a match, lock the cards
         cards[index].classList.add('match');
@@ -109,10 +110,12 @@ function verifyMatch(index) {
         pairsToDiscover--;
         if (pairsToDiscover === 0) winGame();
     } else {
+        let fc = firstCardIndex,
+            sc = index;
         window.setTimeout(function() {
-            hideCard(index);
-            hideCard(firstCardIndex);
-        }, 800);
+            hideCard(sc);
+            hideCard(fc);
+        }, 1000);
     }
 }
 
