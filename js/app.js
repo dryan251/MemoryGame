@@ -23,7 +23,7 @@ function setBoard() {
         cards[i].firstElementChild.className = cardSymbols[i];
     }
     updateScore(0);
-    initStarRating();
+    initRating();
     hitCounter = 0;
     timer = 0;
 }
@@ -96,6 +96,14 @@ for (let i = 0; i < cards.length; i++) {
     });
 }
 
+function initRating() {
+    let stars = document.querySelector('.stars');
+    while (starRating < 3) {
+        star = document.createElement('i');
+        star.classList.add("fa", "fa-star");
+        stars.appendChild(star);
+    }
+}
 
 function setTime() {
     ++timer;
