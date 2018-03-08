@@ -7,6 +7,7 @@ let hitCounter = 0;
 let firstCardIndex = 0;
 let pairsToDiscover = 8;
 let timer = 0;
+let timeInterval;
 let mm = 0,
     ss = 0,
     starRating = 3;
@@ -21,11 +22,17 @@ function setBoard() {
     cardSymbols = shuffle(cardSymbols);
     for (let i = 0; i < cards.length; i++) {
         cards[i].firstElementChild.className = cardSymbols[i];
+        if (cards[i].classList.contains("match")) {
+            cards[i].className = ("card");
+        }
     }
     updateScore(0);
     initRating();
     hitCounter = 0;
+    pairsToDiscover = 8;
+    clearInterval(timeInterval);
     timer = 0;
+    setTime(timer);
 }
 
 //function to hide the card
@@ -83,7 +90,7 @@ for (let i = 0; i < cards.length; i++) {
             hitCounter++;
             if (hitCounter === 1) {
                 //timer
-                setInterval(setTime, 1000);
+                timeInterval = setInterval(setTime, 1000);
             }
             showCard(i);
             if (hitCounter % 2 === 1) {
@@ -96,20 +103,27 @@ for (let i = 0; i < cards.length; i++) {
     });
 }
 
+//set up event listener for restart button
+rb = document.getElementById("restart_button");
+rb.addEventListener('click', function() {
+    setBoard();
+})
+
 function initRating() {
     let stars = document.querySelector('.stars');
     while (starRating < 3) {
-        star = document.createElement('i');
-        star.classList.add("fa", "fa-star");
+        star = document.createElement('li');
+        star.innerHTML = '<i class="fa fa-star">';
         stars.appendChild(star);
+        starRating++;
     }
 }
 
 function setTime() {
-    ++timer;
     ss = (timer % 60);
     mm = parseInt(timer / 60);
     document.querySelector('.timer').textContent = (clock(mm) + ":" + clock(ss));
+    timer++;
 }
 
 function clock(x) {
@@ -148,5 +162,6 @@ function verifyMatch(index) {
 }
 
 function winGame() {
+    clearInterval(timeInterval);
     console.log("You won !!!")
 }
