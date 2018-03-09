@@ -13,31 +13,31 @@ let mm = 0,
     starRating = 3;
 
 //restart button
-let rb = document.getElementById("restart_button");
+let rb = document.getElementById('restart_button');
 
 //cards
-let cards = document.querySelectorAll(".deck .card");
+let cards = document.querySelectorAll('.deck .card');
 
 //elapsed time
-let elapsedTime = document.querySelector(".timer");
+let elapsedTime = document.querySelector('.timer');
 
 //
-let numOfMoves = document.querySelector(".moves");
+let numOfMoves = document.querySelector('.moves');
 
 //stars in Star Rating
-let stars = document.querySelector(".stars");
+let stars = document.querySelector('.stars');
 
 //total number of moves
-let m_totalMoves = document.getElementById("totalMoves");
+let m_totalMoves = document.getElementById('totalMoves');
 
 //total time
-let m_totalTime = document.getElementById("totalTime");
+let m_totalTime = document.getElementById('totalTime');
 
 //Modal Star rating
-let m_starRating = document.getElementById("starRating");
+let m_starRating = document.getElementById('starRating');
 
 //modat - Score tabel
-let modal = document.getElementById("modal");
+let modal = document.getElementById('modal');
 
 //get symbols from cards
 for (let i = 0; i < cards.length; i++) {
@@ -48,8 +48,8 @@ function initBoard() {
     cardSymbols = shuffle(cardSymbols);
     for (let i = 0; i < cards.length; i++) {
         cards[i].firstElementChild.className = cardSymbols[i];
-        if (cards[i].classList.contains("match")) {
-            cards[i].className = ("card");
+        if (cards[i].classList.contains('match')) {
+            cards[i].className = ('card');
         }
     }
     hitCounter = 0;
@@ -73,7 +73,7 @@ function showCard(index) {
 
 /*
  * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
+ *   - shuffle the list of cards using the provided 'shuffle' method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
@@ -100,7 +100,7 @@ function shuffle(array) {
 
 for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener('click', function() {
-        if (!cards[i].classList.contains("open")) {
+        if (!cards[i].classList.contains('open')) {
             hitCounter++;
             if (hitCounter === 1) {
                 //timer
@@ -127,7 +127,8 @@ function initRating() {
 
     while (starRating < 3) {
         star = document.createElement('li');
-        star.innerHTML = '<i class="fa fa-star">';
+        star.innerHTML = '<i class='
+        fa fa - star '>';
         stars.appendChild(star);
         starRating++;
     }
@@ -136,12 +137,12 @@ function initRating() {
 function setTime() {
     ss = (timer % 60);
     mm = parseInt(timer / 60);
-    elapsedTime.textContent = (clock(mm) + ":" + clock(ss));
+    elapsedTime.textContent = (clock(mm) + ':' + clock(ss));
     timer++;
 }
 
 function clock(x) {
-    return (x < 10) ? ("0" + x.toFixed(0)) : x.toFixed(0);
+    return (x < 10) ? ('0' + x.toFixed(0)) : x.toFixed(0);
 }
 
 function updateScore(val) {
@@ -161,7 +162,7 @@ function verifyMatch(index) {
     if (cards[index].firstElementChild.className === cards[firstCardIndex].firstElementChild.className) {
         //we have a match, lock the cards
         cards[index].classList.add('match');
-        cards[firstCardIndex].classList.add("match");
+        cards[firstCardIndex].classList.add('matc');
         pairsToDiscover--;
         if (pairsToDiscover === 0) winGame();
     } else {
@@ -177,23 +178,23 @@ function verifyMatch(index) {
 function winGame() {
     clearInterval(timeInterval);
     m_totalMoves.textContent = (hitCounter / 2);
-    m_totalTime.textContent = (mm + " minutes and " + ss + " seconds");
+    m_totalTime.textContent = (mm + ' minutes and ' + ss + ' seconds');
 
-    //m_starRating.textContent = (starRating + " stars");
+    //m_starRating.textContent = (starRating + ' stars');
     if (starRating > 0) {
         let s = document.createElement('li');
         m_starRating.appendChild(s);
-        m_starRating.firstElementChild.className = ("stars");
+        m_starRating.firstElementChild.className = ('stars');
         for (let i = 0; i < starRating; i++) {
             let temp = document.createElement('i');
-            temp.classList.add("fa", "fa-star");
+            temp.classList.add('fa', 'fa-star');
             m_starRating.firstElementChild.appendChild(temp);
         }
     } else {
         m_starRating.textContent = (' 0 stars')
     }
     modal.classList.add('show');
-    document.querySelector(".close").addEventListener('click', function() {
+    document.querySelector('.close').addEventListener('click', function() {
         modal.classList.remove('show');
         initBoard();
     })
@@ -201,5 +202,5 @@ function winGame() {
 
 function restartGame() {
     initBoard();
-    modal.classList.remove("show");
+    modal.classList.remove('show');
 }
