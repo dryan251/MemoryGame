@@ -69,7 +69,7 @@ h1 {
 
 .deck .card.open {
     transform: rotateY(0);
-    background: #02b3e4;
+    background: #eece42;
     cursor: default;
     animation-name: flipInY;
     -webkit-backface-visibility: visible !important;
@@ -83,7 +83,7 @@ h1 {
 
 .deck .card.match {
     cursor: default;
-    background: #02ccba;
+    background: #f8801e;
     font-size: 33px;
     animation-name: tada;
     -webkit-backface-visibility: visible !important;
@@ -111,7 +111,8 @@ h1 {
     text-align: right;
 }
 
-.score-panel .stars li {
+.score-panel .stars li,
+#starRating .stars {
     list-style: none;
     display: inline-block;
     color: yellow;
@@ -152,12 +153,12 @@ h1 {
 }
 
 .popup {
-    margin: 70px auto;
+    margin: 20% auto;
     padding: 20px;
-    background: #ffffff;
+    background: #f7edc2;
     border-radius: 5px;
-    width: 85%;
-    max-width: 700px;
+    width: 55%;
+    /* max-width: 700px; */
     position: relative;
     transition: all 5s ease-in-out;
     font-family: 'Gloria Hallelujah', cursive;
@@ -165,8 +166,9 @@ h1 {
 
 .popup h2 {
     margin-top: 0;
-    color: #333;
+    color: #396;
     font-family: Tahoma, Arial, sans-serif;
+    text-align: center;
 }
 
 .popup .close {
@@ -201,7 +203,7 @@ h1 {
 }
 
 #play-again {
-    background-color: #141214;
+    background-color: #a7bad0;
     padding: 0.7rem 1rem;
     font-size: 1.1rem;
     display: block;

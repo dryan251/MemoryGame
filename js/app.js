@@ -189,6 +189,8 @@ function winGame() {
             temp.classList.add("fa", "fa-star");
             m_starRating.firstElementChild.appendChild(temp);
         }
+    } else {
+        m_starRating.textContent = (' 0 stars')
     }
     modal.classList.add('show');
     document.querySelector(".close").addEventListener('click', function() {
