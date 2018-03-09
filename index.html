@@ -81,9 +81,27 @@
                 <i class="fa fa-cube"></i>
             </li>
         </ul>
-    </div>
 
-    <script src="js/app.js"></script>
+        <div id="modal" class="overlay">
+            <div class="popup">
+                <h2>Congratulations !!!</h2>
+                <a class="close" href=#>x</a>
+                <div class="content-1">
+                    Congratulations you're a winner !!!
+                </div>
+                <div class="content-2">
+                    <p>You made <span id=totalMoves></span> moves </p>
+                    <p>in <span id=totalTime></span></p>
+                    <p>Your rating is: <span id=starRating></span></p>
+                </div>
+                <button id="play-again" onclick="restartGame()">
+                    Play again </a>
+                </button>
+            </div>
+        </div>
+
+
+        <script src="js/app.js"></script>
 </body>
 
 </html>

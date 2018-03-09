@@ -12,13 +12,39 @@ let mm = 0,
     ss = 0,
     starRating = 3;
 
-//get symbols from cards
+//restart button
+let rb = document.getElementById("restart_button");
+
+//cards
 let cards = document.querySelectorAll(".deck .card");
+
+//elapsed time
+let elapsedTime = document.querySelector(".timer");
+
+//
+let numOfMoves = document.querySelector(".moves");
+
+//stars in Star Rating
+let stars = document.querySelector(".stars");
+
+//total number of moves
+let m_totalMoves = document.getElementById("totalMoves");
+
+//total time
+let m_totalTime = document.getElementById("totalTime");
+
+//Modal Star rating
+let m_starRating = document.getElementById("starRating");
+
+//modat - Score tabel
+let modal = document.getElementById("modal");
+
+//get symbols from cards
 for (let i = 0; i < cards.length; i++) {
     cardSymbols[i] = cards[i].firstElementChild.className;
 }
 
-function setBoard() {
+function initBoard() {
     cardSymbols = shuffle(cardSymbols);
     for (let i = 0; i < cards.length; i++) {
         cards[i].firstElementChild.className = cardSymbols[i];
@@ -26,13 +52,13 @@ function setBoard() {
             cards[i].className = ("card");
         }
     }
-    updateScore(0);
-    initRating();
     hitCounter = 0;
     pairsToDiscover = 8;
-    clearInterval(timeInterval);
     timer = 0;
     setTime(timer);
+    clearInterval(timeInterval);
+    updateScore(0);
+    initRating();
 }
 
 //function to hide the card
@@ -51,7 +77,7 @@ function showCard(index) {
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
-setBoard();
+initBoard();
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -69,18 +95,6 @@ function shuffle(array) {
 
     return array;
 }
-
-
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
 
 //set up the listener event for cards
 
@@ -104,13 +118,13 @@ for (let i = 0; i < cards.length; i++) {
 }
 
 //set up event listener for restart button
-rb = document.getElementById("restart_button");
+
 rb.addEventListener('click', function() {
-    setBoard();
+    initBoard();
 })
 
 function initRating() {
-    let stars = document.querySelector('.stars');
+
     while (starRating < 3) {
         star = document.createElement('li');
         star.innerHTML = '<i class="fa fa-star">';
@@ -122,7 +136,7 @@ function initRating() {
 function setTime() {
     ss = (timer % 60);
     mm = parseInt(timer / 60);
-    document.querySelector('.timer').textContent = (clock(mm) + ":" + clock(ss));
+    elapsedTime.textContent = (clock(mm) + ":" + clock(ss));
     timer++;
 }
 
@@ -131,14 +145,13 @@ function clock(x) {
 }
 
 function updateScore(val) {
-    document.querySelector('.moves').textContent = (val / 2).toFixed(0);
-    if (hitCounter === 22 || hitCounter === 28 ||
-        hitCounter === 36) deleteStar();
+    numOfMoves.textContent = (val / 2).toFixed(0);
+    if (hitCounter === 26 || hitCounter === 38 ||
+        hitCounter === 50) deleteStar();
 }
 
 function deleteStar(index) {
-    let star = document.querySelector('.stars');
-    star.firstElementChild.remove();
+    stars.firstElementChild.remove();
     starRating--;
 }
 
@@ -152,8 +165,8 @@ function verifyMatch(index) {
         pairsToDiscover--;
         if (pairsToDiscover === 0) winGame();
     } else {
-        let fc = firstCardIndex,
-            sc = index;
+        let fc = firstCardIndex, //first clicked card
+            sc = index; //second clicked card
         window.setTimeout(function() {
             hideCard(sc);
             hideCard(fc);
@@ -163,5 +176,28 @@ function verifyMatch(index) {
 
 function winGame() {
     clearInterval(timeInterval);
-    console.log("You won !!!")
+    m_totalMoves.textContent = (hitCounter / 2);
+    m_totalTime.textContent = (mm + " minutes and " + ss + " seconds");
+
+    //m_starRating.textContent = (starRating + " stars");
+    if (starRating > 0) {
+        let s = document.createElement('li');
+        m_starRating.appendChild(s);
+        m_starRating.firstElementChild.className = ("stars");
+        for (let i = 0; i < starRating; i++) {
+            let temp = document.createElement('i');
+            temp.classList.add("fa", "fa-star");
+            m_starRating.firstElementChild.appendChild(temp);
+        }
+    }
+    modal.classList.add('show');
+    document.querySelector(".close").addEventListener('click', function() {
+        modal.classList.remove('show');
+        initBoard();
+    })
+}
+
+function restartGame() {
+    initBoard();
+    modal.classList.remove("show");
 }
