@@ -1,7 +1,6 @@
 /*
  * Create a list that holds all of your cards
  */
-let deckBoard = document.querySelector('.deck');
 let cardSymbols = []; //array to hold symbols
 let hitCounter = 0;
 let firstCardIndex = 0;

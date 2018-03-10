@@ -317,7 +317,9 @@ h1 {
     .deck {
         width: 450px;
         height: 420px;
-        border: 5px solid green;
+    }
+    .card .fa {
+        font-size: 75%;
     }
 }
 
@@ -325,5 +327,8 @@ h1 {
     .deck {
         width: 600px;
         height: 500px;
+    }
+    .card .fa {
+        font-size: 100%;
     }
 }
