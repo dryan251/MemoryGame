@@ -127,8 +127,7 @@ function initRating() {
 
     while (starRating < 3) {
         star = document.createElement('li');
-        star.innerHTML = '<i class='
-        fa fa - star '>';
+        star.innerHTML = '<i class="fa fa-star"</i>';
         stars.appendChild(star);
         starRating++;
     }
@@ -146,7 +145,7 @@ function clock(x) {
 }
 
 function updateScore(val) {
-    numOfMoves.textContent = (val / 2).toFixed(0);
+    numOfMoves.textContent = (val / 2).toFixed(0) + ' moves';
     if (hitCounter === 26 || hitCounter === 38 ||
         hitCounter === 50) deleteStar();
 }
@@ -162,7 +161,7 @@ function verifyMatch(index) {
     if (cards[index].firstElementChild.className === cards[firstCardIndex].firstElementChild.className) {
         //we have a match, lock the cards
         cards[index].classList.add('match');
-        cards[firstCardIndex].classList.add('matc');
+        cards[firstCardIndex].classList.add('match');
         pairsToDiscover--;
         if (pairsToDiscover === 0) winGame();
     } else {

@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Matching Game</title>
     <meta name="description" content="">
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
@@ -18,13 +19,14 @@
         </header>
 
         <section class="score-panel">
+            <h2>Your score:</h2>
             <ul class="stars">
                 <li><i class="fa fa-star"></i></li>
                 <li><i class="fa fa-star"></i></li>
                 <li><i class="fa fa-star"></i></li>
             </ul>
 
-            <span class="moves">3</span> Moves
+            <span class="moves">3 Moves</span>
             <span class="timer">00:00</span>
             <div class="restart" id="restart_button">
                 <i class="fa fa-repeat"></i>
@@ -84,10 +86,10 @@
 
         <div id="modal" class="overlay">
             <div class="popup">
-                <h2>Congratulations !!!</h2>
+                <h2>Congratulations !</h2>
                 <a class="close" href=#>x</a>
                 <div class="content-1">
-                    Congratulations, you're a winner !!!
+                    <p>Congratulations, you're a winner !!!</p>
                 </div>
                 <div class="content-2">
                     <p>You made <span id=totalMoves></span> moves </p>
@@ -95,12 +97,12 @@
                     <p>Your rating is: <span id=starRating></span></p>
                 </div>
                 <button id="play-again" onclick="restartGame()">
-                    Play again </a>
+                    Play again 
                 </button>
             </div>
         </div>
-
-        <script src="js/app.js"></script>
+    </div>
+    <script src="js/app.js"></script>
 </body>
 
 </html>
